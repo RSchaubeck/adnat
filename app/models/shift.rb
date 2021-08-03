@@ -13,4 +13,8 @@
 class Shift < ApplicationRecord
     validates :start, :finish, presence: true
     validates :break_length, numericality: { only_integer: true }, allow_nil: true
+
+    belongs_to :user,
+        class_name: :User,
+        foreign_key: :user_id
 end

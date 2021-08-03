@@ -17,4 +17,12 @@ class User < ApplicationRecord
     validates :password, length: { minimum: 6, allow_nil: true }
     validates :password_digest, presence: true
     validates :session_token, presence: true, uniqueness: true
+
+    has_many :shifts,
+        class_name: :Shift,
+        dependent: :destroy
+
+    belongs_to :organisation,
+        class_name: :Organisation,
+        foreign_key: :organisation_id
 end

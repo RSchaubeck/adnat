@@ -11,4 +11,6 @@
 class Organisation < ApplicationRecord
     validates :name, presence: true
     validates :price, presence: true, format: {with: /\A\d+(?:\.\d{2})?\z/}, numericality: {greater_than: 0}
+
+    has_many :users, class_name: :User
 end
