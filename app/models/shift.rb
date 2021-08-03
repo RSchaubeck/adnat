@@ -11,5 +11,6 @@
 #  updated_at   :datetime         not null
 #
 class Shift < ApplicationRecord
-
+    validates :start, :finish, presence: true
+    validates :break_length, numericality: { only_integer: true }, allow_nil: true
 end
