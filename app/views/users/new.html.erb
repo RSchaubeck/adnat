@@ -1,0 +1,18 @@
+<h1>Adnat</h1>
+<h3>Sign Up</h3>
+
+<div class="session-form">
+    <%= form_with model: @user, url: signup_path, method: "post" do |f| %>
+        <%= f.label :name %>
+        <%= f.text_field :name %>
+        <%= f.label :email, "Email" %>
+        <%= f.text_field :email %>
+        <%= f.label :password, "Password" %><br />
+        <span>(6 characters minimum)</span>
+        <%= f.password_field :password %>
+        <%= f.label :password_confirmation %>
+        <%= f.password_field :password_confirmation %>
+        <%= f.submit "Sign Up" %>
+    <% end %>
+    <%= link_to 'Log in', login_path %>
+</div>
