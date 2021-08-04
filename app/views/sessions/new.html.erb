@@ -1,2 +1,13 @@
 <h1>Adnat</h1>
 <h3>Log In</h3>
+
+<div class="login-form">
+    <%= form_with url: login_path do |form| %>
+        <%= form.label :email, "Email" %>
+        <%= form.text_field :email %>
+        <%= form.label :password, "Password" %>
+        <%= form.password_field :password %>
+        <%= form.submit "Log In" %>
+    <% end %>
+    <%= link_to 'Sign Up', signup_path %>
+</div>
