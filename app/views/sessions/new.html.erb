@@ -2,7 +2,9 @@
 <h3>Log In</h3>
 
 <div class="session-form">
-    <%= form_with url: login_path do |f| %>
+    <%= render 'shared/errors' %>
+
+    <%= form_with scope: :user, url: login_path, method: "post", local: true do |f| %>
         <%= f.label :email, "Email" %>
         <%= f.text_field :email %>
         <%= f.label :password, "Password" %>
