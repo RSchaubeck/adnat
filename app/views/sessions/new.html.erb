@@ -1,1 +1,15 @@
 <h1>Adnat</h1>
+<h3>Log In</h3>
+
+<div class="session-form">
+    <%= render 'shared/errors' %>
+
+    <%= form_with scope: :user, url: login_path, method: "post", local: true do |f| %>
+        <%= f.label :email, "Email" %>
+        <%= f.text_field :email %>
+        <%= f.label :password, "Password" %>
+        <%= f.password_field :password %>
+        <%= f.submit "Log In" %>
+    <% end %>
+    <%= link_to 'Sign Up', signup_path %>
+</div>
