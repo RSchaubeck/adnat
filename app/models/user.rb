@@ -19,15 +19,18 @@ class User < ApplicationRecord
     validates :password_digest, presence: true
     validates :session_token, presence: true, uniqueness: true
 
-    attr_reader :password
-
     has_many :shifts,
         class_name: :Shift,
         dependent: :destroy
 
     belongs_to :organisation,
         class_name: :Organisation,
-        foreign_key: :organisation_id
+        foreign_key: :organisation_id,
+        optional: true
+
+    after_initialize :ensure_session_token
+
+    attr_reader :password
 
     def self.find_by_credentials(email, password)
         user = User.find_by(email: email)
