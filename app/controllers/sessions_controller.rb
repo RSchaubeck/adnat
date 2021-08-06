@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
             render :new
         else
             login_user!(user)
-            redirect_to test_path
+            redirect_to user_url(user)
         end
     end
 
