@@ -16,6 +16,15 @@ class UsersController < ApplicationController
         render :new
     end
 
+    def show
+        @orgs = nil
+        if current_user.organisation_id
+            @orgs = Organisation.find(current_user.organisation_id)
+        else
+            @orgs = Organisation.all
+        end
+    end
+
     private
     
     def user_params
