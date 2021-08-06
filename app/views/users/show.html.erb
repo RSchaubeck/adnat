@@ -1,13 +1,13 @@
 <h1>Adnat</h1>
 <p>Logged in as <%= current_user.name %>.   <%= link_to "Log out", logout_path, method: "delete" %></p>
 <% if current_user.organisation_id %>
-    <h2>Edit Organisation</h2>
+    <h2><%= @orgs.name %></h2>
 <% else %>
     <p>You aren't a member of any organisations. <br /> Join an existing one or create a new one.</p>
     <h2>Organisations</h2>
     <ul>
     <% @orgs.each do |org| %>
-        <li><%= org.name %> </li>
+        <li><%= org.name %> <%= link_to 'Edit', edit_organisation_path(org) %> </li>
     <% end %>
     </ul>
     <h2>Create Organisations</h2>
