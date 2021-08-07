@@ -10,4 +10,5 @@
         <%= f.text_field :hourly_rate %>
         <%= f.submit "Update" %>
     <% end %>
+    <%= link_to 'Delete', organisation_path(@org), method: "delete" %>
 </div>

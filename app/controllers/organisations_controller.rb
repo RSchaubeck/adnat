@@ -33,6 +33,12 @@ class OrganisationsController < ApplicationController
         end
     end
 
+    def destroy
+        @org = Organisation.find(params[:id])
+        @org.destroy
+        redirect_to user_url(current_user)
+    end
+
     private
 
     def org_params
