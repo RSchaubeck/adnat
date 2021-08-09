@@ -39,6 +39,17 @@ class OrganisationsController < ApplicationController
         redirect_to user_url(current_user)
     end
 
+    def join
+        @org = Organisation.find(params[:id])
+        current_user.organisation_id = @org.id
+        if current_user.save
+            redirect_to user_url(current_user)
+        else
+            flash.now[:errors] = @org.errors.full_messages
+            render 'users/show'
+        end
+    end
+
     private
 
     def org_params

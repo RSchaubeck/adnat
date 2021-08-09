@@ -7,7 +7,7 @@
     <h2>Organisations</h2>
     <ul>
     <% @orgs.each do |org| %>
-        <li><%= org.name %> <%= link_to 'Edit', edit_organisation_path(org) %> </li>
+        <li><%= org.name %> <%= link_to 'Edit', edit_organisation_path(org) %> <%= link_to 'Join', controller: "organisations", action: "join", method: "post", id: org %> </li>
     <% end %>
     </ul>
     <h2>Create Organisation</h2>

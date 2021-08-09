@@ -8,4 +8,6 @@ Rails.application.routes.draw do
   delete '/logout' => 'sessions#destroy'
   resources :users, only: :show
   resources :organisations, except: :index
+  get "organisations/:id/join" => 'organisations#join'
+  # post "organisations/:id/join" => 'organisations#join'
 end
