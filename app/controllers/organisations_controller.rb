@@ -1,6 +1,7 @@
 class OrganisationsController < ApplicationController
     
     def create
+        @orgs = Organisation.all
         @org = Organisation.new(org_params)
         if @org.save
             current_user.update(organisation_id: @org.id)
