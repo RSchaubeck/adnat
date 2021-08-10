@@ -7,4 +7,7 @@ Rails.application.routes.draw do
   post '/login' => 'sessions#create'
   delete '/logout' => 'sessions#destroy'
   resources :users, only: :show
+  resources :organisations, except: :index
+  get "organisations/:id/join" => 'organisations#join'
+  get "organisations/:id/leave" => 'organisations#leave'
 end

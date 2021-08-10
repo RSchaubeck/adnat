@@ -10,7 +10,8 @@
 #
 class Organisation < ApplicationRecord
     validates :name, presence: true
-    validates :hourly_rate, presence: true, format: {with: /\A\d+(?:\.\d{2})?\z/}, numericality: {greater_than: 0}
+    validates :hourly_rate, presence: true, format: {with: /\A\d+(?:\.\d{0,2})?\z/}, numericality: {greater_than: 0}
 
-    has_many :users, class_name: :User
+    has_many :users,
+        class_name: :User
 end
