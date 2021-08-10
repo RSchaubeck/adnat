@@ -1,6 +1,10 @@
 <% if current_user.organisation_id %>
     <h2><%= @orgs.name %></h2>
-    <%= link_to 'Edit', edit_organisation_path(@orgs) %> <%= link_to 'Leave', controller: "organisations", action: "leave", method: "post", id: @orgs %>
+    <span> 
+        <%= link_to 'View Shifts', organisation_shifts_path(@orgs) %>
+        <%= link_to 'Edit', edit_organisation_path(@orgs) %>
+        <%= link_to 'Leave', controller: "organisations", action: "leave", method: "post", id: @orgs %>
+    </span>
 <% else %>
     <p>You aren't a member of any organisations. <br /> Join an existing one or create a new one.</p>
     <h2>Organisations</h2>

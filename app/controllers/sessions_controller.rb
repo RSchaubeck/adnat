@@ -5,12 +5,12 @@ class SessionsController < ApplicationController
             params[:user][:password]
         )
 
-        if user.nil?
-            flash.now[:errors] = ["Incorrect email and/or password"]
-            render :new
-        else
+        if user
             login_user!(user)
             redirect_to user_url(user)
+        else
+            flash.now[:errors] = ["Incorrect email and/or password"]
+            render :new
         end
     end
 
