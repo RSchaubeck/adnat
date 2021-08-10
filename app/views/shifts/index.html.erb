@@ -16,7 +16,7 @@
         <% @shifts.each do |shift|%>
             <% user = User.find(shift.user_id) %>
             <% shift_length = ((shift.finish - shift.start) / 60).to_f%>
-            <% payable_work_hours = (shift_length - shift.break_length.to_f) / 60.0 %>
+            <% payable_work_hours = ((shift_length - shift.break_length.to_f) / 60.0).round(2) %>
             <% shift_cost = (payable_work_hours * @org.hourly_rate).round(2) %>
             <tr>
                 <td><%= user.name %></td>
@@ -28,5 +28,16 @@
                 <td><%= shift_cost %></td>
             </tr>
         <% end %>
+        <%= form_with model: @shift, scope: :shift, url: organisation_shifts_path(@org), method: "post", local: true do |f| %>
+            <tr>
+                <td><%= current_user.name %></td>
+                <td><%= f.date_field :day %></td>
+                <td><%= f.time_field :start_time %></td>
+                <td><%= f.time_field :finish_time %></td>
+                <td><%= f.text_field :break_length %></td>
+                <td align="center" colspan="2"><%= f.submit "Create Shift" %></td>
+            </tr>
+        <% end %>
     </tbody>
 </table>
+<%= render 'shared/errors' %>
