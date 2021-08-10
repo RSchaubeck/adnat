@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   get "organisations/:id/join" => 'organisations#join'
   get "organisations/:id/leave" => 'organisations#leave'
 
-  resources :users, only: :show
+  resources :users, only: [:show, :edit, :update]
   resources :organisations, except: :index do
     resources :shifts, only: [:index, :new, :create]
   end

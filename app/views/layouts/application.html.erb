@@ -12,7 +12,7 @@
   <body>
     <% if current_user %>
       <h1><%= link_to 'Adnat', user_url(current_user) %></h1>
-      <p>Logged in as <%= current_user.name %>.   <%= link_to "Log out", logout_path, method: "delete" %></p>
+      <p>Logged in as <%= current_user.name %>. <%= link_to "Log out", logout_path, method: "delete" %> <%= link_to "Edit", edit_user_path(current_user) %></p>
     <% else %>
       <h1><%= link_to 'Adnat', root_url %></h1>
     <% end %>
