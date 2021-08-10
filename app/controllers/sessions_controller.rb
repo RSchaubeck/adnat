@@ -20,6 +20,10 @@ class SessionsController < ApplicationController
     end
 
     def new
-        render :new
+        if current_user
+            redirect_to user_url(current_user)
+        else
+            render :new
+        end
     end
 end
