@@ -2,8 +2,7 @@ class ApplicationController < ActionController::Base
     protect_from_forgery with: :exception
 
     # Expose these methods to views
-    helper_method :current_user
-    helper_method :logged_in?
+    helper_method :current_user, :logged_in?, :get_shifts
 
     private
 
@@ -27,5 +26,15 @@ class ApplicationController < ActionController::Base
 
     def require_user!
         redirect_to login_url if current_user.nil?
+    end
+
+    def get_shifts(users)
+        @shifts = []
+        users.each do |user|
+            user.shifts.each do |shift|
+                @shifts << shift
+            end
+        end
+        @shifts.sort_by!{|shift| shift.start}
     end
 end

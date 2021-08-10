@@ -1,3 +1,32 @@
 <h2><%= @org.name %></h2>
 
 <h3>Shifts</h3>
+
+<table>
+    <thead>
+        <th>Employee Name</th>
+        <th>Shift Date</th>
+        <th>Start Time</th>
+        <th>Finish Time</th>
+        <th>Break Length (minutes)</th>
+        <th>Hours Worked</th>
+        <th>Shift Cost</th>
+    </thead>
+    <tbody>
+        <% @shifts.each do |shift|%>
+            <% user = User.find(shift.user_id) %>
+            <% shift_length = ((shift.finish - shift.start) / 60).to_f%>
+            <% payable_work_hours = (shift_length - shift.break_length.to_f) / 60.0 %>
+            <% shift_cost = (payable_work_hours * @org.hourly_rate).round(2) %>
+            <tr>
+                <td><%= user.name %></td>
+                <td><%= shift.start.strftime("%m/%d/%Y") %></td>
+                <td><%= shift.start.strftime("%l:%M%p") %></td>
+                <td><%= shift.finish.strftime("%l:%M%p") %></td>
+                <td><%= shift.break_length %></td>
+                <td><%= payable_work_hours %></td>
+                <td><%= shift_cost %></td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
