@@ -1,20 +1,12 @@
 class OrganisationsController < ApplicationController
     
     def create
-        @orgs = nil
-        if current_user.organisation_id
-            @orgs = Organisation.find(current_user.organisation_id)
-        else
-            @orgs = Organisation.all
-        end
-
-        @organisation = Organisation.new(org_params)
-        puts org_params
-        if @organisation.save
-            current_user.update(organisation_id: @organisation.id)
+        @org = Organisation.new(org_params)
+        if @org.save
+            current_user.update(organisation_id: @org.id)
             redirect_to user_url(current_user)
         else
-            flash.now[:errors] = @organisation.errors.full_messages
+            flash.now[:errors] = @org.errors.full_messages
             render 'users/show'
         end
     end
@@ -43,6 +35,16 @@ class OrganisationsController < ApplicationController
         @org = Organisation.find(params[:id])
         current_user.organisation_id = @org.id
         if current_user.save
+            redirect_to user_url(current_user)
+        else
+            flash.now[:errors] = @org.errors.full_messages
+            render 'users/show'
+        end
+    end
+
+    def leave
+        @org = Organisation.find(params[:id])
+        if @org.users.delete(current_user.id)
             redirect_to user_url(current_user)
         else
             flash.now[:errors] = @org.errors.full_messages

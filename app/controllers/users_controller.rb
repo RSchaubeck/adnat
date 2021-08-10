@@ -17,7 +17,6 @@ class UsersController < ApplicationController
     end
 
     def show
-        @orgs = nil
         if current_user.organisation_id
             @orgs = Organisation.find(current_user.organisation_id)
         else

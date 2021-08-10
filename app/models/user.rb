@@ -25,7 +25,6 @@ class User < ApplicationRecord
 
     belongs_to :organisation,
         class_name: :Organisation,
-        foreign_key: :organisation_id,
         optional: true
 
     after_initialize :ensure_session_token
