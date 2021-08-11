@@ -9,7 +9,8 @@ class ShiftsController < ApplicationController
     end
 
     def create
-        #pull date and time from params to create an acceptable datetime format 
+        #pull date and time from params to create an acceptable datetime format
+        @org = Organisation.find(params[:organisation_id])
         d = params[:shift][:day]
         s = params[:shift][:start_time]
         f = params[:shift][:finish_time]
@@ -18,9 +19,8 @@ class ShiftsController < ApplicationController
         @shift = Shift.new(shift_params)
         @shift.user_id = current_user.id
         if @shift.save
-            redirect_to 
+            redirect_to organisation_shifts_url(@org)
         else
-            @org = Organisation.find(params[:organisation_id])
             users = @org.users
             get_shifts(users)
             flash.now[:errors] = @shift.errors.full_messages
