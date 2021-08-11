@@ -1,4 +1,5 @@
-class UsersController < ApplicationController
+class UsersController < ApplicationController  
+    before_action :require_user!, only: %i(edit update show)
 
     def create
         @user = User.new(user_params)

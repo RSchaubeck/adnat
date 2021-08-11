@@ -20,6 +20,7 @@ class SessionsController < ApplicationController
     end
 
     def new
+        #logged in user cant go to login page
         if current_user
             redirect_to user_url(current_user)
         else

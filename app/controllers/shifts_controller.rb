@@ -1,6 +1,7 @@
-require 'time'
-
 class ShiftsController < ApplicationController
+    #only logged in user can perform actions
+    before_action :require_user!
+
     def index
         @org = Organisation.find(params[:organisation_id])
         users = @org.users
@@ -8,6 +9,7 @@ class ShiftsController < ApplicationController
     end
 
     def create
+        #pull date and time from params to create an acceptable datetime format 
         d = params[:shift][:day]
         s = params[:shift][:start_time]
         f = params[:shift][:finish_time]

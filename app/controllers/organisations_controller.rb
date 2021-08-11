@@ -1,5 +1,7 @@
 class OrganisationsController < ApplicationController
-    
+    #only logged in user can perform actions
+    before_action :require_user!
+
     def create
         @orgs = Organisation.all
         @org = Organisation.new(org_params)

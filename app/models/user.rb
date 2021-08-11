@@ -14,6 +14,7 @@
 class User < ApplicationRecord
     validates :name, presence: true
     validates :email, uniqueness: true, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP }
+    #allow_nil b/c @password attribute is only set if we change it with #password=
     validates :password, length: { minimum: 6, allow_nil: true }
     validates :password, confirmation: { case_sensitive: true }
     validates :password_digest, presence: true
@@ -41,6 +42,7 @@ class User < ApplicationRecord
         BCrypt::Password.new(self.password_digest).is_password?(password)
     end
 
+    #setter method that hashes password using BCrypt gem
     def password=(password)
         @password = password
         self.password_digest = BCrypt::Password.create(password)
