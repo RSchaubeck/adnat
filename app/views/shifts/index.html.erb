@@ -15,7 +15,7 @@
     <tbody>
         <% @shifts.each do |shift|%>
             <% user = User.find(shift.user_id) %>
-            <% shift_length = ((shift.finish - shift.start) / 60).to_f%>
+            <% shift_length = ((shift.finish - shift.start) / 60).to_f %>
             <% payable_work_hours = ((shift_length - shift.break_length.to_f) / 60.0).round(2) %>
             <% shift_cost = (payable_work_hours * @org.hourly_rate).round(2) %>
             <tr>

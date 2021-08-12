@@ -1,7 +1,7 @@
 <% if current_user.organisation_id %>
     <h2><%= @orgs.name %></h2>
     <span> 
-        <%= link_to 'View Shifts', organisation_shifts_path(@orgs) %>
+        <%= link_to 'View Shifts', organisation_shifts_path(@orgs), data: { turbolinks: false }%>
         <%= link_to 'Edit', edit_organisation_path(@orgs) %>
         <%= link_to 'Leave', controller: "organisations", action: "leave", method: "post", id: @orgs %>
     </span>
